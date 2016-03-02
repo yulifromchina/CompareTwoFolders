@@ -45,7 +45,8 @@ def Compare(path1, path2):
     #获取新包删除了的文件
     delete_file = []
     delete_file = set1-set2
-    
+
+    print u'旧包删除的文件：'
     #加上旧包的前缀，输出这些文件在旧包的名称和路径
     prefix1 = GetPrefix(allFile1[0][0])
     for name in delete_file:       
@@ -53,12 +54,12 @@ def Compare(path1, path2):
         print fullInfo1[name1][0] + '\n'
         print name1
 
-    print '-------------------------'
 
     #获取新包增加的文件
     add_file = []
     add_file = set2- set1
 
+    print u'新包增加的文件：'
     #加上新包的前缀，输出这些文件在新包的名称和路径
     prefix2 = GetPrefix(allFile2[0][0])
     for name in add_file:
@@ -66,10 +67,9 @@ def Compare(path1, path2):
         print fullInfo2[name2][0]+'\n'
         print name2
 
-    print '-------------------------'
 
     #获取版本号没提升的文件
-
+    print u'版本号没有提升的文件：'
     #获取新旧包共有的文件
     common_file = []
     common_file = set1 & set2
@@ -82,4 +82,11 @@ def Compare(path1, path2):
                 print name
                 print fullInfo1[name1][2]
     
-    print '-------------------------'
+
+
+    
+
+        
+    
+            
+    
