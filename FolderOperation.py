@@ -17,9 +17,25 @@ def FindInSingleDir(dirname):
     '''
     allFile = []
     allDll = glob.glob(dirname+os.sep+'*.dll')
-    allFile.append(allDll)
+    tempDll = []
+    
+    #删除后缀名为.dll的文件夹
+    for rev in allDll:
+        if os.path.isfile(rev):
+            tempDll.append(rev)
+            
+
+    allFile.append(tempDll)
+        
     allExe = glob.glob(dirname+os.sep+'*.exe')
-    allFile.append(allExe)
+    tempExe = []
+    #删除后缀名为.exe的文件夹
+    for rev in allExe:
+        if os.path.isfile(rev):
+            tempExe.append(rev)
+         
+    allFile.append(tempExe)
+    
     return allFile
     
 def FindInEntireDir(dirname):
