@@ -39,7 +39,7 @@ def CalcMD5(filepath):
     with open(filepath,'rb') as f:
         md5obj = hashlib.md5()
         md5obj.update(f.read())
-        MD5 = md5obj.hexdigest() 
+        MD5 = md5obj.hexdigest()
         return MD5
 
 def GetFileVersion(filepath):
@@ -47,7 +47,12 @@ def GetFileVersion(filepath):
         fp = pefile.PE(filepath)
     except:
         return 'NULL'
-    FileVersion=fp.FileInfo[0].StringTable[0].entries['FileVersion']
+    #print filepath
+    #FileVersion=fp.FileInfo[0].StringTable[0].entries['FileVersion']
+    try:
+        FileVersion=fp.FileInfo[0].StringTable[0].entries['FileVersion']
+    except:
+        FileVersion=fp.FileInfo[0].StringTable[0].entries['ProductVersion']
     return FileVersion
 
 def GetFileName(filepath):
