@@ -4,3 +4,6 @@ Compare the  versions, MD5 and paths between two Folders.
 
 此python 程序实现该功能。
 1.0 版，实现了print输出PE文件的比较情况。
+1.1版本，进行了以下更改：
+1)修复bug:对于以.dll和.exe结尾的文件夹，把它们当做成了文件
+2)对于不能获取FileVersion的文件，改为获取ProductVersion
