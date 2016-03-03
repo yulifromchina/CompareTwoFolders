@@ -46,30 +46,32 @@ def Compare(path1, path2):
     delete_file = []
     delete_file = set1-set2
 
-    print u'旧包删除的文件：'
+    fp1 = open(u'新包删除的文件.txt','w')
     #加上旧包的前缀，输出这些文件在旧包的名称和路径
     prefix1 = GetPrefix(allFile1[0][0])
     for name in delete_file:       
         name1 = os.path.join(prefix1,name)
-        print fullInfo1[name1][0] + '\n'
-        print name1
+        print >>fp1,fullInfo1[name1][0]
+        print >>fp1,name1
+    fp1.close()
 
 
     #获取新包增加的文件
     add_file = []
     add_file = set2- set1
 
-    print u'新包增加的文件：'
+    fp2 = open(u'新包增加的文件.txt','w')
     #加上新包的前缀，输出这些文件在新包的名称和路径
     prefix2 = GetPrefix(allFile2[0][0])
     for name in add_file:
         name2 = os.path.join(prefix2,name)
-        print fullInfo2[name2][0]+'\n'
-        print name2
+        print >>fp2,fullInfo2[name2][0]
+        print >>fp2,name2
+    fp2.close()
 
 
     #获取版本号没提升的文件
-    print u'版本号没有提升的文件：'
+    fp3 = open(u'版本号没有提升的文件.txt','w')
     #获取新旧包共有的文件
     common_file = []
     common_file = set1 & set2
@@ -79,14 +81,6 @@ def Compare(path1, path2):
         #如果文件MD5不同，但版本号相同，则输出
         if fullInfo1[name1][1] != fullInfo2[name2][1]:
             if fullInfo1[name1][2] == fullInfo2[name2][2]:
-                print name
-                print fullInfo1[name1][2]
-    
-
-
-    
-
-        
-    
-            
-    
+                print >>fp3,name
+                print >>fp3,fullInfo1[name1][2]
+    fp3.close()
