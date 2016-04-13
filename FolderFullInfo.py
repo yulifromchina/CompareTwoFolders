@@ -19,6 +19,7 @@ def GetFullInfo(name_list):
     for sublist in name_list:
         info = []
         for filepath in sublist:
+            filepath = filepath
             filename = GetFileName(filepath)
             md5 = CalcMD5(filepath)
             version = GetFileVersion(filepath)            

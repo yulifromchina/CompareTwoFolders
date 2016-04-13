@@ -1,7 +1,11 @@
 # -*- coding:utf-8 -*-
 '''
 这个文件用于比较并输入两个文件夹内，所有有差异的文件的信息
-输入：两个文件夹的路径
+输入：
+旧包文件夹所在路径
+新包文件夹所在路径
+输出结果所在路径（可选，不填写则默认为/mnt/share）
+
 输出的信息有：
 旧包删除的文件
 新包增加的文件
@@ -12,10 +16,11 @@ from FolderOperation import *
 from FolderFullInfo import *
 from GetSingleInfo import *
 
-def Compare(path1, path2):
+def Compare(path1, path2, txt_path = r'/mnt/share'):
     '''
     输入：两个文件夹的路径 
     '''
+
     #分别获取这两个文件夹下的文件路径列表
     #每个列表又包含很多小列表
     #例如：allFile1[0]=[exe文件的路径]zbxc，allFile1[1]=[dll文件的路径]
@@ -46,7 +51,8 @@ def Compare(path1, path2):
     delete_file = []
     delete_file = set1-set2
 
-    fp1 = open(u'新包删除的文件.txt','w')
+    temp_name = os.path.join(txt_path, 'delete_file.txt')
+    fp1 = open(temp_name,'w')
     #加上旧包的前缀，输出这些文件在旧包的名称和路径
     prefix1 = GetPrefix(allFile1[0][0])
     for name in delete_file:       
@@ -60,7 +66,8 @@ def Compare(path1, path2):
     add_file = []
     add_file = set2- set1
 
-    fp2 = open(u'新包增加的文件.txt','w')
+    temp_name = os.path.join(txt_path, 'add_file.txt')
+    fp2 = open(temp_name,'w')
     #加上新包的前缀，输出这些文件在新包的名称和路径
     prefix2 = GetPrefix(allFile2[0][0])
     for name in add_file:
@@ -71,7 +78,8 @@ def Compare(path1, path2):
 
 
     #获取版本号没提升的文件
-    fp3 = open(u'版本号没有提升的文件.txt','w')
+    temp_name = os.path.join(txt_path, 'version_error.txt')
+    fp3 = open(temp_name,'w')
     #获取新旧包共有的文件
     common_file = []
     common_file = set1 & set2
@@ -83,4 +91,14 @@ def Compare(path1, path2):
             if fullInfo1[name1][2] == fullInfo2[name2][2]:
                 print >>fp3,name
                 print >>fp3,fullInfo1[name1][2]
+                print >>fp3,fullInfo2[name2][2]
     fp3.close()
+    
+
+
+    
+
+        
+    
+            
+    
